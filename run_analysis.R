@@ -11,11 +11,12 @@
 #directory /data in your present working directory.  If this is not the case then the script will fail.
 
 #We will be using a few non-default packages.  Check to see whether or not they're installed.  If they're not installed,
-#then we need to get them.
+# then we need to get them.
+
 if (!require("data.table")) { 
     install.packages("data.table")
     }
-
+ 
 if (!require("reshape2")) {
     install.packages("reshape2")
     }
@@ -80,4 +81,4 @@ merged_melt_data <- melt(merged_data, id = labels, measure.vars = merged_data_la
 
 #Apply the mean and output the tidy data file.
 tidy_data <- dcast(merged_melt_data, Subject + Activity ~ variable, mean)
-write.table(tidy_data, file = "./data/tidy_data.txt")
+write.table(tidy_data, file = "./data/tidy_data.txt", row.names = FALSE)
